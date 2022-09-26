@@ -25,7 +25,7 @@ def detect(save_img=False):
     save_dir = Path(increment_path(Path(opt.project) / opt.name, exist_ok=opt.exist_ok))
     (save_dir / 'labels' if save_txt else save_dir).mkdir(parents=True, exist_ok=True)
 
-    # Inisialisasi
+    # Initialize
     set_logging()
     device = select_device(opt.device)
     half = device.type != 'cpu'
@@ -43,7 +43,7 @@ def detect(save_img=False):
 
     classify = False
     if classify:
-        modelc = load_classifier(name='resnet101', n=2)  ## Inisialisasi
+        modelc = load_classifier(name='resnet101', n=2)  # initialize
         modelc.load_state_dict(torch.load('weights/resnet101.pt', map_location=device)['model']).to(device).eval()
 
     # Set Dataloader
@@ -61,7 +61,7 @@ def detect(save_img=False):
 
     # Run di device if not cpu
     if device.type != 'cpu':
-        model(torch.zeros(1, 3, imgsz, imgsz).to(device).type_as(next(model.parameters())))  # # Inisialisasi
+        model(torch.zeros(1, 3, imgsz, imgsz).to(device).type_as(next(model.parameters())))  # run once
     old_img_w = old_img_h = imgsz
     old_img_b = 1
 
